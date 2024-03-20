@@ -1,13 +1,13 @@
 package ru.filini.cloudstorage.service;
 
-import com.github.dockerjava.api.exception.UnauthorizedException;
-import ru.filini.cloudstorage.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import ru.filini.cloudstorage.exceptions.UnauthorizedException;
+import ru.filini.cloudstorage.repository.UserRepository;
 import ru.filini.cloudstorage.tables.User;
 
 
