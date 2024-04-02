@@ -1,6 +1,5 @@
 package ru.filini.cloudstorage.service;
 
-
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,7 +17,7 @@ import ru.filini.cloudstorage.repository.AuthRepository;
 public class AuthService {
 
     private final AuthRepository authRepository;
-    private final AuthenticationManager authenticationManager;
+    private final AuthenticationManager authManager;
     private final JwtTokenUtil jwtTokenUtil;
     private final UserService userService;
 
@@ -30,7 +29,7 @@ public class AuthService {
         final String username = authRequest.getLogin();
         final String password = authRequest.getPassword();
 
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+        authManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         final UserDetails userDetails = userService.loadUserByUsername(username);
         final String token = jwtTokenUtil.generateToken(userDetails);
         authRepository.putTokenAndUsername(token, username);
@@ -39,7 +38,9 @@ public class AuthService {
     }
 
     public void logout(String authToken) {
-
+        final String token = authToken.substring(7);
+        final String username = authRepository.getUsernameByToken(token);
+        log.info("User {} logout. JWT is disabled.", username);
+        authRepository.removeTokenAndUsernameByToken(token);
     }
-
 }
