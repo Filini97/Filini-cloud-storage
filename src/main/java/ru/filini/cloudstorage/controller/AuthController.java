@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.filini.cloudstorage.DTO.responses.AuthResponse;
 import ru.filini.cloudstorage.DTO.requests.AuthRequest;
 import ru.filini.cloudstorage.service.AuthService;
+import ru.filini.cloudstorage.tables.User;
 
 @RestController
 @AllArgsConstructor

@@ -21,15 +21,17 @@ import java.util.List;
 public class User implements UserDetails, Serializable {
 
     @Id
+    @GeneratedValue
+    private long id;
+
     @Column(nullable = false, unique = true)
     private String username;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<StorageFile> userFiles;
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -38,31 +40,31 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }
