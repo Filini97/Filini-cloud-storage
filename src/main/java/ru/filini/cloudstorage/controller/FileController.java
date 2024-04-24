@@ -41,7 +41,6 @@ public class FileController {
             @RequestHeader("auth-token") String authToken,
             @RequestParam("filename") @NotBlank String filename) {
 
-        // Проверяем существование файла
         if (!isFileExists(authToken, filename)) {
             return ResponseEntity.notFound().build();
         }
@@ -55,7 +54,6 @@ public class FileController {
             @RequestHeader("auth-token") String authToken,
             @RequestParam("filename") @NotBlank String filename) {
 
-        // Проверяем существование файла
         if (!isFileExists(authToken, filename)) {
             return ResponseEntity.notFound().build();
         }
@@ -70,7 +68,6 @@ public class FileController {
             @RequestParam("filename") @NotBlank String filename,
             @RequestBody @Valid EditFileNameRequest editFileNameRQ) {
 
-        // Проверяем существование файла
         if (!isFileExists(authToken, filename)) {
             return ResponseEntity.notFound().build();
         }
