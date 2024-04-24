@@ -11,8 +11,8 @@ import ru.filini.cloudstorage.exceptions.UnauthorizedException;
 import ru.filini.cloudstorage.repository.AuthRepository;
 import ru.filini.cloudstorage.repository.FileRepository;
 import ru.filini.cloudstorage.repository.UserRepository;
-import ru.filini.cloudstorage.tables.StorageFile;
-import ru.filini.cloudstorage.tables.User;
+import ru.filini.cloudstorage.model.StorageFile;
+import ru.filini.cloudstorage.model.User;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
@@ -118,5 +118,15 @@ public class FileService {
             return userRepository.findByUsername(username);
         }
         return null;
+    }
+
+    public boolean isFileExists(String authToken, String filename) {
+        final User user = getUserByAuthToken(authToken);
+        if (user == null) {
+            log.error("Check file existence: Unauthorized");
+            throw new UnauthorizedException("Check file existence: Unauthorized");
+        }
+
+        return fileRepository.existsByUserAndFilename(user, filename);
     }
 }

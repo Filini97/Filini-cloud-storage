@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.filini.cloudstorage.exceptions.UnauthorizedException;
 import ru.filini.cloudstorage.repository.UserRepository;
-import ru.filini.cloudstorage.tables.User;
+import ru.filini.cloudstorage.model.User;
 
 
 @Service

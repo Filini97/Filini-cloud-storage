@@ -1,4 +1,4 @@
-package ru.filini.cloudstorage.tables;
+package ru.filini.cloudstorage.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
