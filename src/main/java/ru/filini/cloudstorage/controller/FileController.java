@@ -85,4 +85,3 @@ public class FileController {
         return !fileService.isFileExists(authToken, filename);
     }
 }
-
