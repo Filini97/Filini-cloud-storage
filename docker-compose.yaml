@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+
+  server:
+    image: backend
+    container_name: 'cloud-storage-server'
+    build: ./
+    ports:
+      - "5454:8787"
+    depends_on:
+      - database
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5454/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_LIQUIBASE_URL: jdbc:postgresql://database:5454/postgres
+      SPRING_LIQUIBASE_USER: postgres
+      SPRING_LIQUIBASE_PASSWORD: 1234
+
+  database:
+    image: mysql
+    container_name: 'cloud-storage-db'
+    volumes:
+      - /mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: postgres
+    ports:
+      - "3232:3232"
